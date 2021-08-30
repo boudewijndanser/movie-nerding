@@ -5,13 +5,12 @@ The goal of this sideproject is to
 - Find a better way to divide state
 - Seperate logic from presentation more
 
-while using the awesome data provided by the [TMDB]()
+while using the awesome data provided by the [TMDB](https://www.themoviedb.org/documentation/api)
 ## Run
 
 In the project directory, you can run:\
 `yarn start`
 
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Data and API provided by:
