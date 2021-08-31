@@ -14,22 +14,20 @@ export type MovieBase = {
     runtime: number
     description: string
     director?: Director
-    //genres: genres | null
+    genres?: Genres
 }
 
 export type Director = {
   name: string,
   id: number,
-  job: string []
+  job: Job []
 }
 
 export type SeriesBase = {
     title: string
 }
 
-export type Genres = [
-    Genre
-]
+export type Genres = Genre[]
 
 export type Genre = {
     id: number,
@@ -112,6 +110,19 @@ export interface Tmdb {
     profile_path?: string | null;
     credit_id: string;
     department: string;
-    job: string;
+    job: Job;
   }
   
+  export type Job = 'Director'
+  | 'Writer'
+  | 'Producer'
+  | 'Editor'
+  | 'Executive Producer'
+  | 'Director of Photography'
+  | 'Art Direction'
+  | 'Production Design'
+  | 'Set Decoration'
+  | 'Storyboard Artist'
+  | 'Supervising Art Director'
+  | 'Costume Design'
+  | 'Hair Department Head'
