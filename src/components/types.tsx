@@ -10,11 +10,32 @@ export type Publication = {
 export type MovieBase = {
     title: string,
     tagline: string,
-    releaseDate: string,
+    releaseDate: string
     runtime: number
     description: string
     director?: Director
     genres?: Genres
+    score: number
+}
+
+export type People = {
+  cast: Actor[]
+  crew: Crew[]
+}
+
+export type Actor = {
+  id: number,
+  name: string,
+  character: string,
+  image: string
+}
+
+export type Crew = {
+  id: number,
+  name: string,
+  department: string,
+  Job: Job,
+  
 }
 
 export type Director = {
