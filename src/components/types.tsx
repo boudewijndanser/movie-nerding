@@ -34,8 +34,8 @@ export type Crew = {
   id: number,
   name: string,
   department: string,
-  Job: Job,
-  
+  job: Job,
+  image: string
 }
 
 export type Director = {
