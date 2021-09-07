@@ -9,7 +9,7 @@ import {
   MovieBase, 
   People, 
   Tmdb
-} from "../types"
+} from "./movieTypes"
 import {
   parseMovieData,
   parsePeople,
@@ -18,10 +18,13 @@ import {
   movieDetailUrl,
   apiKey,
   appendCredits
-} from "./hardcoded"
+} from "../../application/hardcoded"
 import { outputHoursAndMinutes } from "./movieUtils"
-import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { Page } from '../../routes'
+import { 
+  RouteComponentProps, 
+  withRouter 
+} from 'react-router-dom'
+import { Page } from '../../application/routes'
 
 
 const MovieContainer: React.FunctionComponent<Page &RouteComponentProps<any>> = props => {

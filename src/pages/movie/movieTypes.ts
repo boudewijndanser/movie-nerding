@@ -55,6 +55,10 @@ export type Genre = {
     name: string
 }
 
+///////////////////////////////////////////////////////////////////
+// TMDB API response types below
+//////////////////////////////////////////////////////////////////
+
 export interface Tmdb {
     adult: boolean
     backdrop_path: string
@@ -83,29 +87,35 @@ export interface Tmdb {
     vote_count: number
     credits: Credits
   }
+
   export interface GenresEntity {
     id: number
     name: string
   }
+
   export interface ProductionCompaniesEntity {
     id: number
     logo_path?: string | null
     name: string
     origin_country: string
   }
+
   export interface ProductionCountriesEntity {
     iso_3166_1: string
     name: string
   }
+
   export interface SpokenLanguagesEntity {
     english_name: string
     iso_639_1: string
     name: string
   }
+
   export interface Credits {
     cast?: (CastEntity)[] | null
     crew?: (CrewEntity)[] | null
   }
+
   export interface CastEntity {
     adult: boolean
     gender: number
@@ -120,6 +130,7 @@ export interface Tmdb {
     credit_id: string
     order: number
   }
+  
   export interface CrewEntity {
     adult: boolean
     gender: number

@@ -1,4 +1,4 @@
-import { personThumbnailUrlLarge } from './hardcoded';
+import { personThumbnailUrlLarge } from '../../application/hardcoded'
 import { 
   Actor,
   CastEntity, 
@@ -9,7 +9,7 @@ import {
   MovieBase, 
   People, 
   Tmdb
-} from "../types";
+} from "./movieTypes"
 
 export const parseMovieData = (data: Tmdb): MovieBase => ({
   title: data.original_title,
@@ -36,7 +36,6 @@ export const parseCrewMember = (data: CrewEntity): Crew => ({
   job: data.job,
   image: data.profile_path ? `${personThumbnailUrlLarge}/${data.profile_path}` : ''
 })
-
 
 export const parsePeople = (data: Credits): People => {
 

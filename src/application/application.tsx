@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch, RouteComponentProps } from 'react-router-dom'
 import { routes } from './routes'
 
-function App() {
+function Application() {
 
   return (
     <div>
@@ -31,4 +31,4 @@ function App() {
   )
 }
 
-export default App
+export default Application
