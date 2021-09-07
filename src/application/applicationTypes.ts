@@ -1,9 +1,8 @@
 
 export type LoggedInUser = {
     ids: Ids
-    prefrences: Preferences
+    preferences: Preferences
     info: Info
-    data: Data 
 }
 
 export type Ids = {
@@ -19,7 +18,7 @@ export type Preferences = {
 export type Info = {
     name: string
     username: string
-    mughshot: string
+    mugshot: string
     country: string
 }
 
@@ -28,6 +27,7 @@ export type Data = {}
 export type User = {
     kind: 'loggedIn',
     user: LoggedInUser
+    data: Data
 } | {
     kind: 'noUser'
 }
