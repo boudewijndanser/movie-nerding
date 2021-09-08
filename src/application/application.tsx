@@ -1,5 +1,8 @@
-import { BrowserRouter, Route, Switch, RouteComponentProps } from 'react-router-dom'
-import { routes } from './routes'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import AuthenticationContainer1 from '../pages/authentication/authenticationContainer1'
+import AuthenticationContainer2 from '../pages/authentication/authenticationContainer2'
+import movieContainer from '../pages/movie/movieContainer'
+import { HomeContainer } from '../pages/home/home';
 
 function Application() {
 
@@ -7,24 +10,38 @@ function Application() {
     <div>
      <BrowserRouter>
                 <Switch>
-                    {
-                      routes.map((route, index) => {
-                          return (
-                              <Route 
-                                  key={index}
-                                  path={route.path}
-                                  exact={route.exact}
-                                  render={(props: RouteComponentProps<any>) => (
-                                      <route.component
-                                          name={route.name} 
-                                          {...props}
-                                          {...route.props}
-                                      />
-                                  )}
-                              />
-                          )
-                      })
-                    }
+                    <Route
+                        key='1'
+                        path='/'
+                        exact={true}
+                    >
+                        <HomeContainer title='2'/>
+                    </Route>
+
+                    <Route
+                        key='1'
+                        path='/auth'
+                        exact={true}
+                    >
+                        <AuthenticationContainer1 />
+                    </Route>
+
+                    <Route
+                        key='2'
+                        path='/approved'
+                        exact={true}
+                    >
+                        <AuthenticationContainer2 />
+                    </Route>
+
+
+                    <Route
+                        key='3'
+                        path='/movie:number'
+                        exact={true}
+                        component={movieContainer}
+                    /> 
+
                 </Switch>
             </BrowserRouter>
     </div>
