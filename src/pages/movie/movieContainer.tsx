@@ -21,22 +21,25 @@ import {
 } from "../../application/hardcoded"
 import { outputHoursAndMinutes } from "./movieUtils"
 import { 
-  RouteComponentProps, 
+  useParams, 
   withRouter 
 } from 'react-router-dom'
-import { Page } from '../../application/routes'
 
 
-const MovieContainer: React.FunctionComponent<Page &RouteComponentProps<any>> = props => {
+const MovieContainer = (): JSX.Element => {
   const [loading, setLoading] = useState(true)
   // const [error, setError] = useState()
-  let MovieId:string = props.match.params.number
+  let MovieId: movieParam = useParams()
+
+  type movieParam = {
+    number: string
+  }
 
   const [movieBase, setMovieBase] = useState<MovieBase | undefined>(undefined)
   const [people, SetPeople] = useState<People | undefined>(undefined)
 
   useEffect(() => {
-    const url = movieDetailUrl + MovieId + "?api_key=" + apiKey + appendCredits
+    const url = movieDetailUrl + MovieId.number + "?api_key=" + apiKey + appendCredits
 
     const fetchMovieById = async () => {
       setLoading(true)
