@@ -8,7 +8,9 @@ import {
   Director, 
   MovieBase, 
   People, 
-  Tmdb
+  Tmdb,
+  UserMovieDetail,
+  UserMovieDetailResponse
 } from "./movieTypes"
 
 export const parseMovieData = (data: Tmdb): MovieBase => ({
@@ -75,3 +77,9 @@ export const parseDirector = (input: CrewEntity[]): Director => {
 
   return output
 }
+
+export const UserMovieDetailParser = (input: UserMovieDetailResponse): UserMovieDetail => ({
+  favorite: input.favorite,
+  rated: input.rated,
+  watchlist: input.watchlist
+})

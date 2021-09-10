@@ -24,11 +24,11 @@ import {
   useParams, 
   withRouter 
 } from 'react-router-dom'
+import { UserMovieDetails } from './components/userMovieDetails';
 
 
 const MovieContainer = (): JSX.Element => {
   const [loading, setLoading] = useState(true)
-  // const [error, setError] = useState()
   let MovieId: movieParam = useParams()
 
   type movieParam = {
@@ -60,13 +60,13 @@ const MovieContainer = (): JSX.Element => {
       {
         loading && <p>Loading...</p>
       }
-
       {
         movieBase !== undefined && 
             <>
             <h1>{movieBase.title}</h1>
             <h2>{movieBase.tagline}</h2>
             <p>{movieBase.score}</p>
+            {UserMovieDetails(MovieId.number)}
             <p>{movieBase.releaseDate}</p>
             <div className='genreContainer'>{movieBase.genres && movieBase.genres.map(GenreLabel)}</div>
             <p>{outputHoursAndMinutes(movieBase.runtime)}</p>

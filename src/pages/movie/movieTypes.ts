@@ -1,9 +1,9 @@
 
 export type Publication = {
-    kind: "movie",
+    kind: "movie"
     base: MovieBase
 } | {
-    kind: "series",
+    kind: "series"
     base: SeriesBase
 }
 
@@ -39,8 +39,8 @@ export type Crew = {
 }
 
 export type Director = {
-  name: string,
-  id: number,
+  name: string
+  id: number
   job: Job []
 }
 
@@ -51,7 +51,7 @@ export type SeriesBase = {
 export type Genres = Genre[]
 
 export type Genre = {
-    id: number,
+    id: number
     name: string
 }
 
@@ -158,3 +158,21 @@ export interface Tmdb {
   | 'Supervising Art Director'
   | 'Costume Design'
   | 'Hair Department Head'
+
+
+  export type UserMovieDetailResponse = {
+    id: number
+    favorite: boolean
+    rated: boolean | Rating
+    watchlist: boolean
+  }
+
+  export type Rating = {
+    value: number
+  }
+
+  export type UserMovieDetail = {
+    favorite: boolean
+    rated: boolean | Rating
+    watchlist: boolean
+  }
