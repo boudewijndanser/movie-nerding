@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import './index.css'
+import './styling/css/index.css'
 import Application from './application/application'
 import { BrowserRouter } from 'react-router-dom'
 
