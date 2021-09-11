@@ -11,6 +11,7 @@ export type MovieBase = {
     title: string,
     tagline: string,
     cover: string,
+    backdrop: string,
     releaseDate: string
     runtime: number
     description: string
