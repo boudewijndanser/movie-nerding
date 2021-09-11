@@ -16,6 +16,7 @@ import {
 export const parseMovieData = (data: Tmdb): MovieBase => ({
   title: data.original_title,
   tagline: data.tagline,
+  cover: data.poster_path,
   releaseDate: data.release_date,
   runtime: data.runtime,
   description: data.overview,

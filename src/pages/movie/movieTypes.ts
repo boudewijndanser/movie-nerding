@@ -10,6 +10,7 @@ export type Publication = {
 export type MovieBase = {
     title: string,
     tagline: string,
+    cover: string,
     releaseDate: string
     runtime: number
     description: string
