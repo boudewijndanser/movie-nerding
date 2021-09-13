@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin|Roboto+Condensed:400,700');
+
+
+
+.movieDetail {
+    display: block;
+
+}
+
+.singleColumn {
+    width: 100%;
+    margin: auto;
+    // padding-top: 40px;
+    z-index: 0;
+    
+}
+
+.contentInner {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+   align-content: center;
+}
+
+.backgroundImg {
+    position: absolute;
+    top: 158px;
+    z-index: -5;
+    display: flex;
+    width: 100%;
+    height: 750px;
+    filter: grayscale(100%) contrast(130%);
+    opacity: 0.1;
+}
+
+.backgroundColor {
+    background-image: linear-gradient(to right, rgba(40.00%, 58.43%, 57.65%, 1.00) 150px, rgba(40.00%, 58.43%, 57.65%, 0.84) 100%);
+    position: absolute;
+    top: 158px;
+    z-index: -6;
+    width:100%;
+    height: 750px;
+}
+.castAndFacts {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.movieCastWrapper {
+    grid-column: 1 / 10;
+}
+
+.sideBarWrapper {
+    grid-column: 10 / 13;
+}

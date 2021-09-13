@@ -1,0 +1,17 @@
+.movieCast {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12.7rem, 1fr));
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    justify-items: stretch;
+    align-items: start;
+    padding: 2rem 2rem;
+    width: 100%;
+}
+
+.title h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 24px;
+    color: $color-accent;
+    padding: 3rem 2rem 0;
+}
