@@ -57,6 +57,14 @@ export type Genre = {
     name: string
 }
 
+export type ProductionCompany = {
+  id: number,
+  logo?: string,
+  name: string
+}
+
+export type ProductionCompanies = ProductionCompany[] | []
+
 ///////////////////////////////////////////////////////////////////
 // TMDB API response types below
 //////////////////////////////////////////////////////////////////

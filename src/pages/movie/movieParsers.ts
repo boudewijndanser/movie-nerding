@@ -8,42 +8,45 @@ import {
   Director, 
   MovieBase, 
   People, 
+  ProductionCompaniesEntity, 
+  ProductionCompany, 
   Tmdb,
   UserMovieDetail,
   UserMovieDetailResponse
 } from "./movieTypes"
 
-export const parseMovieData = (data: Tmdb): MovieBase => ({
-  title: data.original_title,
-  tagline: data.tagline,
-  cover: data.poster_path,
-  releaseDate: data.release_date,
-  runtime: data.runtime,
-  description: data.overview,
-  director: data.credits.crew ? parseDirector(data.credits.crew) : undefined,
-  genres: data.genres ? data.genres : undefined,
-  score: data.vote_average
+export const parseMovieData = (input: Tmdb): MovieBase => ({
+  title: input.original_title,
+tagline: input.tagline,
+  cover: input.poster_path,
+  backdrop: input.backdrop_path,
+  releaseDate: input.release_date,
+  runtime: input.runtime,
+  description: input.overview,
+  director: input.credits.crew ? parseDirector(input.credits.crew) : undefined,
+  genres: input.genres ? input.genres : undefined,
+  score: input.vote_average
 })
 
-export const parseActor = (data: CastEntity): Actor => ({
-  id: data.id,
-  name: data.name,
-  character: data.character,
-  image: data.profile_path ? `${personThumbnailUrlLarge}/${data.profile_path}` : ''
+export const parseActor = (input: CastEntity): Actor => ({
+  id: input.id,
+  name: input.name,
+  character: input.character,
+  image: input.profile_path ? `${personThumbnailUrlLarge}/${input.profile_path}` : ''
 })
 
-export const parseCrewMember = (data: CrewEntity): Crew => ({
-  id: data.id,
-  name: data.name,
-  department: data.department,
-  job: data.job,
-  image: data.profile_path ? `${personThumbnailUrlLarge}/${data.profile_path}` : ''
+export const parseCrewMember = (input: CrewEntity): Crew => ({
+  id: input.id,
+  name: input.name,
+  department: input.department,
+  job: input.job,
+  image: input.profile_path ? `${personThumbnailUrlLarge}/${input.profile_path}` : ''
 })
 
-export const parsePeople = (data: Credits): People => {
+export const parsePeople = (input: Credits): People => {
 
-  let mappedCast = data.cast ? data.cast.map(parseActor) : []
-  let mappedCrew = data.crew ? data.crew.map(parseCrewMember) : []
+  let mappedCast = input.cast ? input.cast.map(parseActor) : []
+  let mappedCrew = input.crew ? input.crew.map(parseCrewMember) : []
 
   let output: People = {
     cast: mappedCast,
@@ -83,4 +86,10 @@ export const UserMovieDetailParser = (input: UserMovieDetailResponse): UserMovie
   favorite: input.favorite,
   rated: input.rated,
   watchlist: input.watchlist
+})
+
+export const ParseProductionCompany = (input: ProductionCompaniesEntity): ProductionCompany => ({
+  id: input.id,
+  logo: input.logo_path !== null ? input.logo_path : undefined,
+  name: input.name
 })

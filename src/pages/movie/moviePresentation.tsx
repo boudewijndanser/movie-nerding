@@ -1,13 +1,14 @@
-import { MovieBase, People } from './movieTypes'
+import { MovieBase, People, ProductionCompanies } from './movieTypes'
 import { MovieTitle } from './components/movieTitle'
 import { MovieCover } from './components/movieCover'
 import { DirectorCompoment } from './components/directorComponent';
 import { backgroundPosterUrl } from '../../application/hardcoded';
 import { CastMember } from './components/castMember';
 import { GenreLabel } from './components/genreLabel';
+import { SideBar } from './components/sidebar';
 
 
-export const MoviePresentation = (movieBase: MovieBase, people: People ): JSX.Element => {
+export const MoviePresentation = (movieBase: MovieBase, people: People, productionCompanies: ProductionCompanies ): JSX.Element => {
     
     return(
         <>
@@ -46,10 +47,16 @@ export const MoviePresentation = (movieBase: MovieBase, people: People ): JSX.El
         </div>
         <div className='genreContainer'>{movieBase.genres && movieBase.genres.map(GenreLabel)}</div>
         <div className="castAndFacts">
-                <div className="movieCastWrapper">
+            <div className="movieCastWrapper">
                 <div className='movieCast'>{people?.cast.slice(0,9).map(CastMember)}</div>
-                </div>
-                </div>
+            </div>
+            <div className="sideBarWrapper">
+                {
+                    SideBar(productionCompanies)
+                }
+            </div>
+        </div>
+
         </>
     )
 }
