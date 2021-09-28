@@ -1,8 +1,10 @@
-import { UserWatchlist } from '../user/userDataTypes';
-import { ProfilePresentation } from './profilePresentation';
+import { UserMovieList } from '../user/userDataTypes'
+import { ProfilePresentation } from './profilePresentation'
 
 export type ProfileProps = {
-    watchlist?: UserWatchlist
+    watchlist?: UserMovieList
+    ratings?: UserMovieList
+    favorites?: UserMovieList
 }
 export const ProfileContainer = (props: ProfileProps ): JSX.Element => {
 
@@ -10,7 +12,9 @@ export const ProfileContainer = (props: ProfileProps ): JSX.Element => {
         <div>
             {
                 props.watchlist !== undefined &&
-                ProfilePresentation(props.watchlist)
+                props.ratings !== undefined &&
+                props.favorites !== undefined &&
+                ProfilePresentation(props.watchlist, props.ratings, props.favorites)
             }
         </div>
     )
