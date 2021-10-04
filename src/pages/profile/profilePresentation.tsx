@@ -10,25 +10,37 @@ export const ProfilePresentation = (watchlist: UserMovieList, ratings: UserMovie
 
     return (
         <div>
-            <NavLink to="/profile/watchlist" activeClassName="selected">
-                Watchlist
-            </NavLink>
-            <NavLink to="/profile/ratings" activeClassName="selected">
-                Ratings
-            </NavLink>
-            <NavLink to="/profile/favorites" activeClassName="selected">
-                Favorites
-            </NavLink>
-            
-            { watchlist && sub === 'watchlist' &&
-                watchlist.movies.map(MovieCoverSmall)
-            }
-            { ratings && sub === 'ratings' &&
-                ratings.movies.map(MovieCoverSmall)
-            }
-            { favorites && sub === 'favorites' &&
-                favorites.movies.map(MovieCoverSmall)
-            }
+            <div>
+                    <NavLink to="/profile/watchlist" activeStyle={{
+    fontWeight: "bold",
+    color: "black",
+    backgroundColor: 'white'
+  }} className='tablink'>
+                    Watchlist
+                    </NavLink>
+                <NavLink to="/profile/ratings" activeClassName="selected" className='tablink'>
+                    Ratings
+                </NavLink>
+                <NavLink to="/profile/favorites" activeClassName="selected" className='tablink'>
+                    Favorites
+                </NavLink>
+            </div>
+        <div className='media_items results'>
+            <div className='page_wrapper'>
+                { 
+                    watchlist && sub === 'watchlist' &&
+                    watchlist.movies.map(MovieCoverSmall)
+                }
+                { 
+                    ratings && sub === 'ratings' &&
+                    ratings.movies.map(MovieCoverSmall)
+                }
+                { 
+                    favorites && sub === 'favorites' &&
+                    favorites.movies.map(MovieCoverSmall)
+                }
+            </div>
+        </div>
         </div>
     )
 }

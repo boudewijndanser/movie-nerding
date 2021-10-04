@@ -1,19 +1,10 @@
 import { useParams } from 'react-router-dom'
-import { UserMovieList } from '../user/userDataTypes'
-import { ProfilePresentation, profileSub } from './profilePresentation'
+import { ProfilePresentation } from './profilePresentation'
+import { ProfileProps, ProfileParam } from './profileTypes'
 
-export type ProfileProps = {
-    watchlist?: UserMovieList
-    ratings?: UserMovieList
-    favorites?: UserMovieList
-}
 export const ProfileContainer = (props: ProfileProps ): JSX.Element => {
 
-    type ParamType = {
-        sub: profileSub
-      }
-      
-      let { sub } = useParams<ParamType>()
+      let { sub } = useParams<ProfileParam>()
 
     return (
         <div>

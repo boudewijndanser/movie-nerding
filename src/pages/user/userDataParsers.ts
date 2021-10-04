@@ -1,14 +1,15 @@
-import { MovieResult, MovieThumb, UserWatchlist, WatchlistResponse } from './userDataTypes';
+import { MovieResult, MovieThumb, UserMovieList, MovieResponse } from './userDataTypes';
 
-
-export const parseWatchlistItem = (input: MovieResult ): MovieThumb => ({
+// Add genres
+export const parseMovielistItem = (input: MovieResult ): MovieThumb => ({
     id: input.id,
     title: input.title,
-    cover: input.poster_path !== null ? input.poster_path : ''
+    cover: input.poster_path !== null ? input.poster_path : '',
+    rating: input.rating ? input.rating : undefined
 })
 
-export const parseWatchlistRepsonse = (input: WatchlistResponse ): UserWatchlist => ({
-    movies: input.results.map(parseWatchlistItem),
+export const parseMovielistRepsonse = (input: MovieResponse ): UserMovieList => ({
+    movies: input.results !== undefined ? input.results.map(parseMovielistItem) : [],
     total: input.total_results,
     pages: input.total_pages
 })
