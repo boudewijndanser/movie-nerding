@@ -1,10 +1,6 @@
 
 
-export type UserMovieList = {
-    movies: MovieThumb[]
-    total: number
-    pages: number
-}
+export type UserMovieList = MovieThumb[]
 
 export type MovieThumb = {
     id: number

@@ -8,8 +8,8 @@ export const parseMovielistItem = (input: MovieResult ): MovieThumb => ({
     rating: input.rating ? input.rating : undefined
 })
 
-export const parseMovielistRepsonse = (input: MovieResponse ): UserMovieList => ({
-    movies: input.results !== undefined ? input.results.map(parseMovielistItem) : [],
-    total: input.total_results,
-    pages: input.total_pages
-})
+export const parseMovielistRepsonse = (input: MovieResponse ): UserMovieList => { 
+    console.log('--> parseMovieResponse: ', input)
+    return input.results !== undefined ? input.results.map(parseMovielistItem) : [] 
+
+}
