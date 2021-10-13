@@ -186,3 +186,8 @@ export interface Tmdb {
     rated: boolean | Rating
     watchlist: boolean
   }
+
+export type GenreObject = {
+  id: number
+  name: string
+}
