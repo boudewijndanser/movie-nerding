@@ -9,6 +9,26 @@ export type MovieThumb = {
     rating?: number
 }
 
+export type UserMovieData = {
+    favorite: boolean
+    watchlist: boolean
+    rating: number
+}
+
+export type MovieData = {
+    releaseDate: string
+    genres: string[]
+    voteAverage: number
+}
+
+export type MovieThumbMoreData = {
+    id: number
+    title: string
+    cover: string
+    userData: UserMovieData
+    movieData: MovieData
+}
+
 ///////////////////////////////////////////////////////////////////
 // TMDB API response types below
 //////////////////////////////////////////////////////////////////
