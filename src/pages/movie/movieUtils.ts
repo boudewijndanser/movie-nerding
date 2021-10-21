@@ -1,3 +1,5 @@
+import { genreObjects } from '../../application/hardcoded';
+import { UserMovieList } from '../user/userDataTypes';
 import { GenreObject } from './movieTypes';
 
 export const outputHoursAndMinutes = (input:number):string => {
@@ -25,10 +27,39 @@ export const genreGetTitleFromId = (ids: number[], genres: GenreObject[] ): stri
 
     return output
 }
-export const testArray = [
-    28,
-    9648,
-    878
-  ]
 
+export const extractGenreIds = (input: UserMovieList ):number[] => {
+    let output:number[] = []
 
+    input.map(movie => {
+        movie.movieData !== undefined
+        ? movie.movieData.genres.map(genre => {
+            output.push(genre)
+            }
+        )
+        : console.log('empty')
+    })
+
+    return output
+}
+
+export const returnGenresAndCounts = (input: UserMovieList) => {
+    // Store all ids in an array
+    let arrayOfIds: number[] = extractGenreIds(input)
+
+    // Count them and return an array 
+    const counted = arrayOfIds.reduce((acc:any, curr) => (acc[curr] = (acc[curr] || 0) + 1, acc), {})
+    
+    // Create objects
+    let obj = Object.keys(counted).map(key => {
+        let output = {
+            id: +key,
+            count: counted[key],
+            title: genreGetTitleFromId([+key], genreObjects)[0]
+        }
+        return output
+    }).sort((a,b) => b.count - a.count)
+
+    console.log('obj ', obj)
+
+}

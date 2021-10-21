@@ -12,6 +12,8 @@ Overview of what I want to work on
 
 ## Application
 ### MVP
+
+- [  ] Add catches to API calls
 - [ ] Add object with userData to each movieItem {
     favorite: boolean
     watchlist: boolean
@@ -30,7 +32,8 @@ Overview of what I want to work on
 - [ ] List pagination (Watchlist, favorites, ratings)
 The list return 20 items at once with a number of page
 - [ ] Show rating on profile/ratings
-- [ ] Get genres out of list and match the id's with the titles / display them
+- [x] Get genres out of list and match the id's with the titles
+- [  ] Display them in the headers
 
 ### Optional
 - [ ] Show ratings on all items, compare other 2 with ratings output, add rating to the items when present
