@@ -13,7 +13,7 @@ Overview of what I want to work on
 ## Application
 ### MVP
 
-- [ ] Add catches to API calls
+- [x] Add catches to API calls
 - [ ] Add object with userData to each movieItem {
     favorite: boolean
     watchlist: boolean
@@ -41,10 +41,10 @@ The list return 20 items at once with a number of page
 
 ## Movie detail
 ### MVP
-- [ ] Show rating on cover if present
+- [ ] Show rating on cover if present //Almost...
 - [ ] Link to actor detail, local or on TMDB
 
 ### Optional
-- [ ] Show favorite / watchlist / rating on cover
+- [ ] Show favorite / watchlist / rating on cover //Almost
 - [ ] Set above from there
 

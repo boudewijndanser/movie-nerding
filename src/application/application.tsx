@@ -1,7 +1,7 @@
 import { 
     BrowserRouter, 
     Route, 
-    Switch 
+    Switch
 } from 'react-router-dom'
 import AuthenticationContainer1 from '../pages/authentication/authenticationContainer1'
 import { AuthenticationContainer2 } from '../pages/authentication/authenticationContainer2'
@@ -10,7 +10,7 @@ import { HomeContainer } from '../pages/home/home'
 import { LoggedInUser } from './applicationTypes'
 import { 
     getCookie, 
-    updateCookie 
+    updateCookie
 } from './cookies'
 import { 
     useState, 
@@ -24,7 +24,7 @@ import {
 } from '../pages/user/userDataTypes'
 import { 
     accountBase, 
-    apiKey 
+    apiKey
 } from './hardcoded';
 import { parseMovielistRepsonse } from '../pages/user/userDataParsers'
 import { ProfileContainer } from '../pages/profile/profileContainer'
@@ -35,6 +35,7 @@ function Application() {
     const [watchlist, setWatchlist] = useState<UserMovieList>()
     const [favorites, setFavorites] = useState<UserMovieList>()
     const [ratings, setRatings] = useState<UserMovieList>()
+    const [error, setError] = useState<boolean>(false)
 
     const liftUpUser = (user: LoggedInUser): void => {
 
@@ -75,7 +76,9 @@ function Application() {
                     },
                     preferences: {
                         interfaceLanguage,
-                        includeAdult: includeAdult === 'true' ? true : false
+                        includeAdult: includeAdult === 'true' 
+                            ? true 
+                            : false
                     },
                     info: {
                         name,
@@ -93,12 +96,14 @@ function Application() {
         const url = accountBase + user?.ids.id + '/watchlist/movies?api_key=' + apiKey + '&session_id=' + user?.ids.sessionId
 
         const fetchWatchlist = async () => {
-
+            try {
             const response = await fetch(url)
             const json:MovieResponse = await response.json()
 
             setWatchlist(parseMovielistRepsonse(json))
-            // Add catch
+            } catch {
+                setError(true)
+            }
 
         }
 
@@ -110,68 +115,80 @@ function Application() {
 
         const fetchFavoritelist = async () => {
 
-            const response = await fetch(url)
-            const json:MovieResponse = await response.json()
+            try {
+                const response = await fetch(url)
+                const json:MovieResponse = await response.json()
 
-            setFavorites(parseMovielistRepsonse(json))
-            // Add catch
+                setFavorites(parseMovielistRepsonse(json))
+            } catch {
+                setError(true)
+            }
 
         }
 
-        if(user?.ids.sessionId !== undefined) fetchFavoritelist()
+        if(user?.ids.sessionId !== undefined) {
+            fetchFavoritelist()
+        }
     },[user])
-
 
     useEffect(() => {
         
         const urlWithPage = (page:number) => accountBase + 7872845 + '/rated/movies?api_key=' + apiKey + '&session_id=' + user?.ids.sessionId+'&page='+page
         
-        // Variables below will be used to check if we needto load more
-
+        // Variables below will be used to check if we need to load more
+        
         let collectedMovies: MovieThumb[] = []
         let page: number = 1
         let totalMovies: number
             
-        const fetchRatingslist = async (page:number=1): Promise<MovieThumb[]> => {
+        const fetchRatingslist = async (page:number=1): Promise<MovieThumb[] | undefined > => {
+            try {
+                const response = await fetch(urlWithPage(page))
+                const json:MovieResponse = await response.json()
+                const parsedJson: MovieThumb[]= parseMovielistRepsonse(json)
 
-            const response = await fetch(urlWithPage(page))
-            const json:MovieResponse = await response.json()
-            const parsedJson: MovieThumb[]= parseMovielistRepsonse(json)
+                totalMovies = json.total_results
 
-            totalMovies = json.total_results
+                if(collectedMovies === []) {
+                    collectedMovies = parsedJson
+                } 
 
-            if(collectedMovies === []) {
-                collectedMovies = parsedJson
-            } 
+                if(collectedMovies !== []) {
+                    collectedMovies = [...collectedMovies, ...parsedJson]
 
-            if(collectedMovies !== []) {
-                collectedMovies = [...collectedMovies, ...parsedJson]
+                    setRatings(collectedMovies)
+                } 
 
-                setRatings(collectedMovies)
-            } 
+                if(collectedMovies.length < totalMovies) {
+                    page = page +1
 
-            if(collectedMovies.length < totalMovies) {
-                page = page +1
-
-                fetchRatingslist(page)
+                    fetchRatingslist(page)
+                }
+                
+                return collectedMovies
+            } catch {
+                setError(true)
+                return undefined
             }
-            
-            return collectedMovies
         }
 
         if(user?.ids.sessionId !== undefined) {
-
             fetchRatingslist(page)
-           
         }
 
     },[user])
 
 
+    
+
   return (
     <div>
     { user?.info &&
         NavContainer(user.info.mugshot)
+    } 
+    {
+        error && 
+            <p>Something went wrong...</p>
     }
      <BrowserRouter>
         <div className="wrapper">
@@ -216,6 +233,7 @@ function Application() {
                         exact={true}
                     >
                         <MovieContainer />
+
                     </Route> 
 
                 </Switch>
