@@ -1,6 +1,6 @@
 import { genreObjects } from '../../application/hardcoded';
 import { UserMovieList } from '../user/userDataTypes';
-import { GenreObject } from './movieTypes';
+import { GenreObject, sideBarFilterItem } from './movieTypes';
 
 export const outputHoursAndMinutes = (input:number):string => {
 
@@ -24,7 +24,7 @@ export const genreGetTitleFromId = (ids: number[], genres: GenreObject[] ): stri
            : null
         )
     })
-    // console.log('-> genreGetTitleFromId: output', output)
+
     return output
 }
 
@@ -39,31 +39,47 @@ export const extractGenreIds = (input: UserMovieList ):string[] => {
         )
         : console.log('empty')
     })
-    console.log('extractGenreIds: ', output)
+
     return output
 }
 
-export const returnGenresAndCounts = (input: UserMovieList) => {
-    // console.log('-> returnGenresAndCounts: input', input)
+export const genreIdFromTitle = (title: string, genres: GenreObject[] ): number => {
+
+    let output: number = 0
+
+    genres.map(genre => {
+        return genre.name === title 
+        ? output = genre.id
+        : ''
+    })
+
+    return output
+}
+
+export const returnGenresAndCounts = (input: UserMovieList): sideBarFilterItem[] => {
+
     // Store all ids in an array
     let arrayOfIds: string[] = extractGenreIds(input)
-    console.log('arrayOfIds: ', arrayOfIds)
+
     // Count them and return an array 
     const counted = arrayOfIds.reduce((acc:any, curr) => (acc[curr] = (acc[curr] || 0) + 1, acc), {})
+    
+    //Use this in the left sidebar!
     console.log('--> counted: ', counted)
 
     // Create objects
     let obj = Object.keys(counted).map(key => {
         let output = {
-            id: +key,
+            id: genreIdFromTitle(key, genreObjects),
             count: counted[key],
-            title: genreGetTitleFromId([+key], genreObjects)[0]
+            title: key
         }
         return output
     }).sort((a,b) => b.count - a.count)
 
     console.log('obj ', obj)
 
+    return obj
 }
 
 
