@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin|Roboto+Condensed:400,700');
+
+// section.panel:last-of-type {
+//     padding-bottom: 0;
+// }
+// section.panel:first-of-type {
+//     border-top: none;
+//     padding-top: 0;
+// }
+// section.panel {
+//     width: 100%;
+//     display: block;
+//     padding: 30px 0;
+//     border-top: 1px solid #d7d7d7;
+// }
+// body * {
+//     box-sizing: border-box;
+// }
+// article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+//     display: block;
+// }
+
+// section {
+//     display: block;
+// }
+
+// div.media.discover div.results {
+//     margin-top: -30px;
+// }
+
+// body * {
+//     box-sizing: border-box;
+// }
+
+// div {
+//     display: block;
+// }
+// body {
+//     // display: flex;
+//     // flex-direction: column;
+//     // min-height: 100%;
+//     // height: auto;
+//     -ms-overflow-style: -ms-autohiding-scrollbar;
+//     background-color: rgba(var(--tmdbDarkBlue), 1);
+//     color: #000;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+// }
+
+// div.page_wrapper {
+//     // width: 100%;
+//     display: grid;
+// }
+
+// body * {
+//     box-sizing: border-box;
+// }
+// user agent stylesheet
+// div {
+//     display: block;
+// }
+
+.movieGrid {
+    // display: grid;
+    // height: 100vh;
+    // max-width: 100%;
+    // // grid-template: repeat(3, 1fr) / 3fr minmax(50px, 300px) 1fr;
+    // grid-template-columns: repeat(12, 1fr);
+    // grid-gap: 2.6rem;
+    // align-content: center;
+    // // padding: 10px;
+    display: flex;
+     flex-wrap: wrap;
+     padding: 24px;
+}
+
+
+
+// /* Set height of body and the document to 100% to enable "full page tabs" */
+// body, html {
+//     width: 100%;
+//     margin: 10px;
+//     font-family: Arial;
+//   }
+  
+//   /* Style tab links */
+//   .tablink {
+//     background-color: rgb(185, 185, 185);
+//     color: white;
+//     float: left;
+//     border: none;
+//     outline: none;
+//     cursor: pointer;
+//     padding: 14px 16px;
+//     font-size: 17px;
+//     width: 25%;
+//   }
+  
+//   .tablink:hover {
+//     background-color: #777;
+//   }
+  
+//   /* Style the tab content (and add height:100% for full page content) */
+//   .tabcontent {
+//     color: white;
+//     display: none;
+//     padding: 100px 20px;
+//     height: 100%;
+//   }
+  
+// .selected {
+//     background-color: rgb(255, 255, 255);
+//     color: white;
+//     float: left;
+//     border: none;
+//     outline: none;
+//     cursor: pointer;
+//     padding: 14px 16px;
+//     font-size: 17px;
+//     width: 25%;
+// }
+
+//   #Home {background-color: red;}
+//   #News {background-color: green;}
+//   #Contact {background-color: blue;}
+//   #About {background-color: orange;}
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+/* COLORS and FONTS */
+body {
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    line-height: 3;
+}
+header {
+    background: orangered;
+}
+main {
+    background: rgb(255, 255, 255);
+}
+footer {
+    background: deeppink;
+}
+.left-sidebar {
+    background: rgb(237, 238, 240);
+}
+.right-sidebar {
+    background: forestgreen;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container, 
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+@media all and (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        flex-wrap: wrap;    
+    } 
+    header, 
+    footer {
+        width: 100%;
+    }
+    main {
+        flex: 2;
+        order: 2;
+        min-height: 80vh;
+    }
+    
+    .left-sidebar {
+        order: 1;
+        flex: 1;
+    }
+    .right-sidebar {
+        flex: 1;
+        order: 3;
+    }
+    footer {
+        order: 4;
+    }
+}
+
+@media all and (min-width: 768px) {
+    .content {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    main {
+        flex: 2;
+        order: 2;
+        min-height: 80vh;
+    }
+    .left-sidebar {
+        order: 1;
+        flex: 1;
+    }
+    .right-sidebar {
+        flex: 1;
+        order: 3;
+    }
+}
