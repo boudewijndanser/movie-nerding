@@ -24,32 +24,34 @@ export const genreGetTitleFromId = (ids: number[], genres: GenreObject[] ): stri
            : null
         )
     })
-
+    // console.log('-> genreGetTitleFromId: output', output)
     return output
 }
 
-export const extractGenreIds = (input: UserMovieList ):number[] => {
-    let output:number[] = []
+export const extractGenreIds = (input: UserMovieList ):string[] => {
+    let output:string[] = []
 
-    input.map(movie => {
-        movie.movieData !== undefined
+    input.map(movie => { 
+        return movie.movieData !== undefined
         ? movie.movieData.genres.map(genre => {
             output.push(genre)
             }
         )
         : console.log('empty')
     })
-
+    console.log('extractGenreIds: ', output)
     return output
 }
 
 export const returnGenresAndCounts = (input: UserMovieList) => {
+    // console.log('-> returnGenresAndCounts: input', input)
     // Store all ids in an array
-    let arrayOfIds: number[] = extractGenreIds(input)
-
+    let arrayOfIds: string[] = extractGenreIds(input)
+    console.log('arrayOfIds: ', arrayOfIds)
     // Count them and return an array 
     const counted = arrayOfIds.reduce((acc:any, curr) => (acc[curr] = (acc[curr] || 0) + 1, acc), {})
-    
+    console.log('--> counted: ', counted)
+
     // Create objects
     let obj = Object.keys(counted).map(key => {
         let output = {
@@ -63,3 +65,13 @@ export const returnGenresAndCounts = (input: UserMovieList) => {
     console.log('obj ', obj)
 
 }
+
+
+    // const isMovieInList = (movies: UserMovieList):boolean => {
+    //     const pathArray = window.location.pathname.split('/');
+    //     const id = pathArray[2];
+    //     let output = movies.filter(movie => movie.id === parseInt(id))
+    //     console.log('----> paramId: ', id)
+    //     // console.log('-> isMovieInList: ', output)
+    //     return output.length > 0
+    // }
