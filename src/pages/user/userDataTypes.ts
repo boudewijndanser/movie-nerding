@@ -6,19 +6,20 @@ export type MovieThumb = {
     id: number
     title: string
     cover: string
-    rating?: number
+    movieData?: MovieData
+    userData?: UserMovieData
 }
 
 export type UserMovieData = {
     favorite: boolean
     watchlist: boolean
-    rating: number
+    rating?: number
 }
 
 export type MovieData = {
     releaseDate: string
     genres: string[]
-    voteAverage: number
+    rating?: number
 }
 
 export type MovieThumbMoreData = {
