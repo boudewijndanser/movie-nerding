@@ -26,7 +26,10 @@ import {
     accountBase, 
     apiKey
 } from './hardcoded';
-import { parseMovielistRepsonse } from '../pages/user/userDataParsers'
+import { 
+    addFavouriteToRating, 
+    parseMovielistRepsonse
+} from '../pages/user/userDataParsers'
 import { ProfileContainer } from '../pages/profile/profileContainer'
 
 function Application() {
@@ -189,6 +192,13 @@ function Application() {
     {
         error && 
             <p>Something went wrong...</p>
+    }
+
+    {
+        ratings != undefined &&
+        favorites != undefined &&
+        watchlist != undefined &&
+        addFavouriteToRating(favorites,watchlist,ratings)
     }
      <BrowserRouter>
         <div className="wrapper">
