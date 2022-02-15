@@ -26,8 +26,8 @@ import {
     accountBase, 
     apiKey
 } from './hardcoded';
-import { 
-    addFavouriteToRating, 
+import {  
+    combineUserData, 
     parseMovielistRepsonse
 } from '../pages/user/userDataParsers'
 import { ProfileContainer } from '../pages/profile/profileContainer'
@@ -35,9 +35,13 @@ import { ProfileContainer } from '../pages/profile/profileContainer'
 function Application() {
 
     const [user, setUser] = useState<LoggedInUser>()
+
     const [watchlist, setWatchlist] = useState<UserMovieList>()
     const [favorites, setFavorites] = useState<UserMovieList>()
     const [ratings, setRatings] = useState<UserMovieList>()
+    const [combined, setCombined] = useState<UserMovieList>()
+
+    const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<boolean>(false)
 
     const liftUpUser = (user: LoggedInUser): void => {
@@ -110,6 +114,7 @@ function Application() {
 
         }
 
+
         if(user?.ids.sessionId !== undefined) fetchWatchlist()
     },[user])
 
@@ -167,7 +172,7 @@ function Application() {
 
                     fetchRatingslist(page)
                 }
-                
+
                 return collectedMovies
             } catch {
                 setError(true)
@@ -176,11 +181,20 @@ function Application() {
         }
 
         if(user?.ids.sessionId !== undefined) {
-            fetchRatingslist(page)
+            fetchRatingslist(page).then(function() {
+                setLoading(false)
+            })
+            
         }
 
     },[user])
 
+    useEffect(() => {
+        if(loading == false && favorites && watchlist && ratings) {
+        console.log('Loaded!')
+        setCombined(combineUserData(favorites,watchlist,ratings))
+        }
+    }, [loading])
 
     
 
@@ -193,13 +207,10 @@ function Application() {
         error && 
             <p>Something went wrong...</p>
     }
-
-    {
-        ratings != undefined &&
-        favorites != undefined &&
-        watchlist != undefined &&
-        addFavouriteToRating(favorites,watchlist,ratings)
+    {   loading &&
+        <p>Loading...</p>
     }
+
      <BrowserRouter>
         <div className="wrapper">
         <div className ="content">
@@ -232,9 +243,7 @@ function Application() {
                         exact={true}
                     >
                         <ProfileContainer 
-                            watchlist={watchlist} 
-                            ratings={ratings}
-                            favorites={favorites}
+                            all={combined != undefined ? combined : []} 
                             />
                     </Route>
                     <Route

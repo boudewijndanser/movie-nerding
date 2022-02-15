@@ -1,19 +1,15 @@
-import { UserMovieList } from '../user/userDataTypes'
+import { MovieThumb, UserMovieList } from '../user/userDataTypes'
 import { MovieCoverSmall } from './components/movieCoverSmall'
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { returnGenresAndCounts } from '../movie/movieUtils'
+import { filterListType, returnGenresAndCounts } from '../movie/movieUtils'
 import { sideBarFilterItem } from '../movie/movieTypes'
+import { listType, profileSub } from './profileTypes'
 
-export type profileSubTypes = 'watchlist' | 'favorites' | 'ratings'
-export type profileSub = profileSubTypes | undefined
-
-export const ProfilePresentation = (watchlist: UserMovieList, ratings: UserMovieList, favorites: UserMovieList, sub: profileSub): JSX.Element => {
+export const ProfilePresentation = (all: UserMovieList, sub: profileSub): JSX.Element => {
     
-    let sideBar = returnGenresAndCounts(ratings)
-    console.log('Ratings: ', ratings)
-
      const[selectedGenre, setSelectedGenre] = useState<string | undefined>(undefined)
+
     useEffect(() => {
         console.log('selectedGenre: ', selectedGenre)
     }, [selectedGenre])
@@ -29,7 +25,7 @@ export const ProfilePresentation = (watchlist: UserMovieList, ratings: UserMovie
                         backgroundColor: 'white'
                     }} className='tablink'
                 >
-                    {`( ${watchlist.length} ) Watchlist`}
+                    {`Watchlist`}
                 </NavLink>
                 <NavLink 
                     to="/profile/ratings"
@@ -41,7 +37,7 @@ export const ProfilePresentation = (watchlist: UserMovieList, ratings: UserMovie
                     activeClassName="selected" 
                     className='tablink'
                 >
-                    {`( ${ratings.length} ) Ratings`}
+                    {`Ratings`}
                 </NavLink>
                 <NavLink 
                     to="/profile/favorites"
@@ -53,87 +49,52 @@ export const ProfilePresentation = (watchlist: UserMovieList, ratings: UserMovie
                     activeClassName="selected" 
                     className='tablink'
                 >
-                    {`( ${favorites.length} ) Favorites`}
+                    {`Favorites`}
                 </NavLink>
             </header>
         <div className='content'>
             <main>
             <ul className='movieGrid' key='weqe'>
                 { 
-                    watchlist && sub === 'watchlist' &&
-                    watchlist.map(MovieCoverSmall)
-                }
-                { 
-                    ratings && sub === 'ratings' 
-                    && selectedGenre != undefined &&
-                    ratings.filter(item => item.movieData?.genres.includes(selectedGenre))
-                    .map(MovieCoverSmall)
-                }
-
-                { 
-                    ratings && sub === 'ratings' 
-                    && selectedGenre == undefined &&
-                    ratings.map(MovieCoverSmall)
-                }
-                { 
-                    favorites && sub === 'favorites' &&
-                    favorites.map(MovieCoverSmall)
+                    all &&
+                    filterListType(all,sub).map(MovieCoverSmall)
                 }
             </ul>
             </main>
-            <aside className='left-sidebar'>
-                {
-                    sideBar.map(item => {
-                        return (
-                            <>
-                                {
-                                <div>
-                                <input 
-                                    id={`checkbox-${item.title}`}
-                                    key={`checkbox-${item.title}`}
-                                    type="checkbox"
-                                    checked={selectedGenre === item.title}
-                                    onClick={() => {
-                                        if (selectedGenre !== item.title) {
-                                        setSelectedGenre(item.title)
-                                        } else {
-                                            setSelectedGenre(undefined)
+            {
+                all && 
+                <aside className='left-sidebar'>
+                    {
+                        returnGenresAndCounts(filterListType(all,sub)).map(item => {
+                                return (
+                                    <>
+                                        {
+                                        <div>
+                                        <input 
+                                            id={`checkbox-${item.title}`}
+                                            key={`checkbox-${item.title}`}
+                                            type="checkbox"
+                                            checked={selectedGenre === item.title}
+                                            onChange={() => {
+                                                if (selectedGenre !== item.title) {
+                                                setSelectedGenre(item.title)
+                                                } else {
+                                                    setSelectedGenre(undefined)
+                                                }
+                                            }}
+                                            name={item.title}
+                                        />
+                                        <label>{`(${item.count}) ${item.title}`}</label>
+                                        </div>
                                         }
-                                    }}
-                                    name={item.title}
-                                />
-                                <label>{`(${item.count}) ${item.title}`}</label>
-                                </div>
-                                }
-                            </>
-                        )
-                    })
-                }
-            </aside>
+                                    </>
+                                )
+                        })
+                    }
+                </aside>
+            }
         </div>
         </div>
     )
 }
 
-export const sideBarItem = (input: sideBarFilterItem): JSX.Element => {
-    return (
-        <>
-        {
-            <>
-            <input 
-                id={`checkbox-${input.title}`}
-                key={`checkbox-${input.title}`}
-                type="checkbox"
-                checked={false}
-                onClick={() => {
-                    // setSelectedGenre(input.title)
-                }}
-            />
-
-            <p>{input.title}</p>
-            <p>{input.count}</p>
-            </>
-        }
-        </>
-    )
-}

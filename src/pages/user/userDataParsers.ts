@@ -68,10 +68,10 @@ export const combineUserData = (favourite: UserMovieList,watchlist: UserMovieLis
 
         return !isDuplicate
     })
+    console.log('==> filtered.length: ', filtered.length)
+    // console.log('Collected: ',collected)
+    // console.log('Filtered: ', filtered)
 
-    console.log('Collected: ',collected)
-    console.log('Filtered: ', filtered)
-
-    //return filtered
+    return filtered
 
 }

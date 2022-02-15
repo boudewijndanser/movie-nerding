@@ -191,3 +191,9 @@ export type GenreObject = {
   id: number
   name: string
 }
+
+export type sideBarFilterItem = {
+  id: number
+  count: number
+  title: string
+}

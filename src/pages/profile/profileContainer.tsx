@@ -7,12 +7,10 @@ export const ProfileContainer = (props: ProfileProps ): JSX.Element => {
       let { sub } = useParams<ProfileParam>()
 
     return (
-        <div>
+        <div key='profileContainer'>
             {
-                props.watchlist !== undefined &&
-                props.ratings !== undefined &&
-                props.favorites !== undefined &&
-                ProfilePresentation(props.watchlist, props.ratings, props.favorites, sub)
+                props.all !== undefined &&
+                ProfilePresentation(props.all, sub)
             }
         </div>
     )

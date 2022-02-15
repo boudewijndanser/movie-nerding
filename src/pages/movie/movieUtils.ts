@@ -1,6 +1,7 @@
 import { genreObjects } from '../../application/hardcoded';
-import { UserMovieList } from '../user/userDataTypes';
+import { MovieThumb, UserMovieList } from '../user/userDataTypes';
 import { GenreObject, sideBarFilterItem } from './movieTypes';
+import { listType } from '../profile/profileTypes';
 
 export const outputHoursAndMinutes = (input:number):string => {
 
@@ -65,7 +66,7 @@ export const returnGenresAndCounts = (input: UserMovieList): sideBarFilterItem[]
     const counted = arrayOfIds.reduce((acc:any, curr) => (acc[curr] = (acc[curr] || 0) + 1, acc), {})
     
     //Use this in the left sidebar!
-    console.log('--> counted: ', counted)
+    // console.log('--> counted: ', counted)
 
     // Create objects
     let obj = Object.keys(counted).map(key => {
@@ -77,7 +78,7 @@ export const returnGenresAndCounts = (input: UserMovieList): sideBarFilterItem[]
         return output
     }).sort((a,b) => b.count - a.count)
 
-    console.log('obj ', obj)
+    // console.log('obj ', obj)
 
     return obj
 }
@@ -91,3 +92,26 @@ export const returnGenresAndCounts = (input: UserMovieList): sideBarFilterItem[]
     //     // console.log('-> isMovieInList: ', output)
     //     return output.length > 0
     // }
+
+    export const filterListType = (movies: MovieThumb[], listType?: listType): MovieThumb[] => {
+    
+        let output:MovieThumb[] = movies
+    
+        if ( listType == 'ratings') {
+            output= movies.filter(movie => movie.userData.rating != undefined)
+        } 
+    
+        if (listType == 'favorites') {
+            output= movies.filter(movie => movie.userData.favorite == true)
+        }
+    
+        if (listType == 'watchlist') {
+            output= movies.filter(movie => movie.userData.watchlist == true)
+        }
+    
+        console.log('-> filterListType')
+        console.log('--> Input.length: ', movies.length)
+        console.log('--> filtered.length: ', output.length )
+    
+        return output
+    }
