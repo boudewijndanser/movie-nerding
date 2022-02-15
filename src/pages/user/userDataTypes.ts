@@ -6,8 +6,8 @@ export type MovieThumb = {
     id: number
     title: string
     cover: string
-    movieData?: MovieData
-    userData?: UserMovieData
+    movieData: MovieData
+    userData: UserMovieData
 }
 
 export type UserMovieData = {
