@@ -8,19 +8,20 @@ Overview of what I want to work on
 - [ ] Set active tab
 
 ### Optional
-- [ ] Show number of favorites / watchlist / ratings
+- [x] Show number of favorites / watchlist / ratings
 
 ## Application
+[ ] Add extra check to be sure all movies are loaded from API before passing to profileContainer
 ### MVP
 
 - [x] Add catches to API calls
-- [ ] Add object with userData to each movieItem {
+- [X] Add object with userData to each movieItem {
     favorite: boolean
     watchlist: boolean
     rating: number
 }
-- [ ] Map add all movieItems to 1 array?
-- [ ] Or when parsing pass in the other to set the userData values
+- [x] Map add all movieItems to 1 array?
+- [x] Or when parsing pass in the other to set the userData values
 ## Home
 
 ### MVP
