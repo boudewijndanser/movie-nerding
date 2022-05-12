@@ -1,11 +1,45 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { filterListType, returnGenresAndCounts } from '../movie/movieUtils'
 import { ProfilePresentation } from './profilePresentation'
-import { ProfileProps, ProfileParam } from './profileTypes'
+import { ProfileProps, ProfileParam, subNav } from './profileTypes'
 
 export const ProfileContainer = (props: ProfileProps ): JSX.Element => {
 
       let { sub } = useParams<ProfileParam>()
+
+      const [selectedGenres, setSelectedGenres] = useState<number[]>([])
+    
+      const passSelectedGenre = (input: number):number[] => {
+   
+        let output:number[] = selectedGenres
+        
+        if (input && selectedGenres && !selectedGenres.includes(input)){
+            output.push(input)
+        }
+     
+        setSelectedGenres(output)
+    
+        return output
+    }
+
+    let profileSub: subNav = [
+        {
+           to: '/profile/watchlist',
+           title: 'Watchlist',
+           count: filterListType(props.all, 'watchlist').length
+        },
+        {
+            to: '/profile/ratings',
+            title: 'Ratings',
+            count: filterListType(props.all, 'ratings').length
+         },
+         {
+            to: '/profile/favorites',
+            title: 'Favorites',
+            count: filterListType(props.all, 'favorites').length
+         }
+    ]
 
     return (
         <div key='profileContainer'>
@@ -13,46 +47,14 @@ export const ProfileContainer = (props: ProfileProps ): JSX.Element => {
                 props.all !== undefined &&
                 props.all.length > 0 &&
                 sub !== undefined &&
-                ProfilePresentation({movies: filterListType(props.all,sub), selectedGenre: '', genres: returnGenresAndCounts(props.all)})
+                <ProfilePresentation
+                    movies={filterListType(props.all,sub)}
+                    selectedGenres={selectedGenres} 
+                    genres={returnGenresAndCounts(props.all)}
+                    passGenre={passSelectedGenre}
+                    subNav={profileSub}
+                />
             }
         </div>
     )
 }
-
-
- {/* <header>
-                <NavLink 
-                    to="/profile/watchlist" 
-                    activeStyle={{
-                        fontWeight: "bold",
-                        color: "black",
-                        backgroundColor: 'white'
-                    }} className='tablink'
-                >
-                    {`Watchlist ${filterListType(all, 'watchlist').length}`}
-                </NavLink>
-                <NavLink 
-                    to="/profile/ratings"
-                    activeStyle={{
-                        fontWeight: "bold",
-                        color: "black",
-                        backgroundColor: 'white'
-                    }}
-                    activeClassName="selected" 
-                    className='tablink'
-                >
-                    {`Ratings ${filterListType(all, 'ratings').length}`}
-                </NavLink>
-                <NavLink 
-                    to="/profile/favorites"
-                    activeStyle={{
-                        fontWeight: "bold",
-                        color: "black",
-                        backgroundColor: 'white'
-                    }} 
-                    activeClassName="selected" 
-                    className='tablink'
-                >
-                    {`Favorites ${filterListType(all, 'favorites').length}`}
-                </NavLink>
-            </header> */}

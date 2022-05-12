@@ -11,7 +11,9 @@ export const ProfileSidebar = (props: profileSidebar): JSX.Element => {
                 <aside className='left-sidebar'>
                     {
                         props.genres.map(item => {
+
                             let selected: boolean = props.selectedGenres.includes(item.id)
+                            
                                 return (
                                     <>
                                         { 

@@ -19,7 +19,9 @@ export type types = 'ratings' | 'watchlist' | 'favorites'
 export type profilePresentation = {
   movies: UserMovieList
   genres: sideBarFilterItem[]
-  selectedGenre: string | undefined
+  selectedGenres: number[] | []
+  passGenre:  (input: number) => number[]
+  subNav: subNav
 }
 
 export type profileSubNavigation = {
@@ -28,5 +30,18 @@ export type profileSubNavigation = {
 
 export type profileSidebar = {
   genres: sideBarFilterItem[]
-  selectedGenre: string | undefined
+  selectedGenres: number[]
+  passGenre:  (input: number) => number[]
 }
+
+export type genreTitle = 'Action' | 'Adventure' | 'Animation' | 'Comedy' | 'Crime' | 'Documentary' | 'Drama' | 'Family' | 'Fantasy' | 'History' | 'Horror' | 'Music' | 'Mystery' | 'Romance' | 'Science Fiction' | 'TV Movie' | 'Thriller' | 'War' | 'Western'
+export type genres = genreTitle[]
+
+
+export type subNavItem = {
+  to: string
+  title: string
+  count: number
+}
+
+export type subNav = subNavItem[]
